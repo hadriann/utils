@@ -1,0 +1,49 @@
+IN & OUT OF VIM
+
+ZZ              - Save file if modified and quit. Same as ':x'.
+ZQ              - Quit without saving. Same as ':q!'.
+
+
+WORKING WITH THE SHELL
+
+C-z             - Drop to shell. Type 'fg' to return to vim.
+:sh             - Drop to shell. Type 'exit' to return to vim.
+:!!             - Reexecute last shell command.
+:!ctags -R      - (Re)generate the tags file for current directory.
+:!php -l %      - Check syntax of current PHP file.
+:!wc %          - Count words in current file.
+:!rot13         - Encode selected text with ROT13. Same as 'g?'.
+:r !date        - Insert current date.
+:r !cal         - Insert calendar.
+:r !ls          - Insert directory listing.
+
+
+SEARCHING & INDENTING
+
+:%s/A/B/gc      - Search for A, replace with B. With confirmation.
+*               - Search for word under cursor.
+%               - Find matching bracket.
+==              - Reindent current line.
+=               - Format selected block.
+=%              - Format block to matching bracket.
+>>, <<          - Indent and unindent current line.
+
+
+FOLDING
+
+za              - Toggle current block fold.
+zm              - Collapse all folds.
+zr              - Expand all folds.
+
+
+COMFORT
+
+C-c             - Enter normal mode.
+C-n, C-p        - Trigger and navigate autocomplete.
+C-]             - Go to tag definition for tag under cursor.
+gf              - Open file under cursor.
+zz              - Scroll to focus on current line.
+cc              - Change line.
+ciw             - Change word.
+ciX             - Change inside X. X can be (, {, ", etc.
+C               - Change from cursor to EOL.
