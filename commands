@@ -1,12 +1,10 @@
 IN & OUT OF VIM
-```````````````
 
 ZZ              - Save file if modified and quit. Same as ':x'.
 ZQ              - Quit without saving. Same as ':q!'.
 
 
 WORKING WITH THE SHELL
-``````````````````````
 
 C-z             - Drop to shell. Type 'fg' to return to vim.
 :sh             - Drop to shell. Type 'exit' to return to vim.
@@ -21,7 +19,6 @@ C-z             - Drop to shell. Type 'fg' to return to vim.
 
 
 SEARCHING & INDENTING
-`````````````````````
 
 :%s/A/B/gc      - Search for A, replace with B. With confirmation.
 *               - Search for word under cursor.
@@ -33,7 +30,6 @@ SEARCHING & INDENTING
 
 
 BLOCK FOLDING
-`````````````
 
 za              - Toggle current block fold.
 zm              - Collapse all folds.
@@ -41,7 +37,6 @@ zr              - Expand all folds.
 
 
 COMFORT
-```````
 
 C-c             - Enter normal mode.
 C-n, C-p        - Trigger and navigate autocomplete.
