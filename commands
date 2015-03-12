@@ -31,10 +31,23 @@ SEARCHING & INDENTING
 
 BLOCK FOLDING
 
-za              - Toggle current block fold.
+zo              - Open current fold.
+zc              - Close current fold.
+za              - Toggle current fold.
 zm              - Collapse all folds.
 zr              - Expand all folds.
 
+DIFFS
+
+Open vim in diff mode with 'vimdiff' or 'vim -d', they are equivalent.
+
+do              - Diff obtain changes from other window.
+dp              - Diff put changes into the other window.
+]c              - Next difference.
+[c              - Previous difference.
+C-W + w         - Switch to the other split window. Same as C-W + C-W.
+:diffu          - Update or recalculate diff.
+:syntax off     - Disable syntax highlighting.
 
 COMFORT
 
