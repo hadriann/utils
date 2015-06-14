@@ -3,11 +3,11 @@ utils
 
 Vim settings and setup, minimal templates, reset styles, and some more. Practical pieces of code and text.
 
-Up to this moment, the following parts are included:
+The following parts are included:
 
-- A sample vimrc configuration file (vimrc);
-- A text file with helpful vim commands (vim.txt);
-- A vim install and setup Bash script (vimsetup.sh);
-- An HTML5 markup template (template.html);
-- A CSS reset file (reset.css);
-- A JavaScript source code minification program (mini.c).
+- A sample vimrc configuration file (vimrc)
+- A text file with helpful vim commands (vim.txt)
+- A custom install and setup script written in Bash (vimsetup.sh)
+- An HTML5 markup template (template.html)
+- A CSS reset file (reset.css)
+- A JavaScript source code minification program written in C (mini.c)
