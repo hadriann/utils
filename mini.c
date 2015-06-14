@@ -1,3 +1,8 @@
+/**
+ * This is a proof-of-concept program for JavaScript source code
+ * minification. It is not meant and it is not safe for production use.
+ * This program is subject to change and to further testing.
+ */
 #include <stdio.h>
 #include <ctype.h>
 
@@ -10,17 +15,6 @@ struct {
         in_space,
         in_regex;
 } flag;
-
-int find(int a, int v[])
-{
-    int i, len;
-    len = sizeof(v) / sizeof(v[0]);
-
-    for (i = 0; i < len; i++)
-        if (a == v[i])
-            return 1;
-    return 0;
-}
 
 static inline int in_comment()
 {
@@ -42,15 +36,9 @@ static inline int in_special_context()
     return in_comment() || in_string() || in_regex();
 }
 
-/**
- * @return 1 for success, 0 otherwise
- */
 int usage(int argc)
 {
-    if (argc != 2)
-        return 0;
-    else
-        return 1;
+    return argc == 2;
 }
 
 void process(FILE* f)
@@ -126,11 +114,9 @@ void process(FILE* f)
         }
         else if (flag.in_regex == 1 && c == '/' && pc != '\\') {
             flag.in_regex = 2;
-            puts("S");
         }
         else if (flag.in_regex == 2 && !isalpha(c)) {
             flag.in_regex = 0;
-            puts("ZZZ");
         }
 
         if (!skip && !in_comment() && !flag.in_space) {
@@ -146,25 +132,24 @@ void process(FILE* f)
 
 int main(int argc, char* argv[])
 {
-    if (!usage(argc)) {
-        puts("You need to specify a valid file name as the first argument.");
-        return 1;
-    }
-
     int ok;
-    char* filename = argv[1];
-    FILE* f = fopen(filename, "r");
 
-    if (f) {
-        process(f);
-        puts("");
-        fclose(f);
-        ok = 0;
+    if (usage(argc)) {
+        FILE* f = fopen(argv[1], "r");
+        if (f) {
+            process(f);
+            puts("");
+            fclose(f);
+            ok = 0;
+        }
+        else {
+            puts("Unable to read the input file.");
+            ok = 1;
+        }
     }
     else {
-        puts("Unable to read the input file.");
+        puts("You need to specify a valid file name as the first argument.");
         ok = 1;
     }
-
     return ok;
 }
