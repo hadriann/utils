@@ -1,4 +1,12 @@
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+Plug 'https://github.com/ludovicchabant/vim-gutentags'
+Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/scrooloose/nerdtree'
+
+call plug#end()
 
 set nocompatible
 set noexrc
@@ -9,7 +17,7 @@ filetype indent on
 
 syntax enable
 
-set mouse=a
+set mouse=r
 set ttyfast
 set encoding=utf-8
 set novisualbell
@@ -47,50 +55,38 @@ set completeopt=longest,menuone
 set wrap
 set wrapscan
 
-let html_no_rendering=1
-let mapleader=','
-
 set foldmethod=marker
 set foldmarker={,}
 set foldlevelstart=100
 
-" Auto commands
+set background=dark
+colorscheme delek
+
+autocmd BufRead * NERDTreeFind
+autocmd BufRead * wincmd l
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Colors
-set background=dark
-if has("gui_running")
-    colorscheme solarized
-else
-    colorscheme default
-endif
+let html_no_rendering=1
+let mapleader=','
 
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
-map <S-H> gT
-map <S-L> gt
 
-" Show spaces
-nmap <leader>s :set list!<CR>
+""" show spaces
+map <leader>s :set list!<CR>
 
-" Show highlighting
-nmap <leader>h :set hlsearch!<CR>
+""" show highlighting
+map <leader>h :set hlsearch!<CR>
 
-" PHP lint
-nmap <leader>p :!php -l %<CR>
+""" php lint
+map <leader>p :!php -l %<CR>
 
-" JS lint
-nmap <leader>j :!jslint --terse --vars --browser --this --continue %<CR>
-
-" Tagbar
-nmap <leader>t :TagbarToggle<CR>
-
-" CtrlP
-let g:ctrlp_map = '<leader>c'
-let g:ctrlp_cmd = 'CtrlP'
+""" ctrlp
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
-let g:ctrlp_prompt_mappings = {
-\ 'AcceptSelection("e")': ['<c-t>'],
-\ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-\ }
+let g:ctrlp_max_files = 0
+
+""" nerdtree
+map <leader>n :NERDTreeFind<CR>
+map <leader>m :NERDTreeToggle<CR>
