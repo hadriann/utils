@@ -5,6 +5,8 @@ Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'leafgarland/typescript-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -17,7 +19,7 @@ filetype indent on
 
 syntax enable
 
-set mouse=r
+set mouse=a
 set ttyfast
 set encoding=utf-8
 set novisualbell
@@ -60,10 +62,9 @@ set foldmarker={,}
 set foldlevelstart=100
 
 set background=dark
-colorscheme delek
+colorscheme PaperColor
 
-autocmd BufRead * NERDTreeFind
-autocmd BufRead * wincmd l
+"autocmd BufRead * NERDTreeFind
 autocmd BufWritePre * :%s/\s\+$//e
 
 let html_no_rendering=1
@@ -79,9 +80,10 @@ map <leader>s :set list!<CR>
 map <leader>h :set hlsearch!<CR>
 
 """ php lint
-map <leader>p :!php -l %<CR>
+map <leader>o :!php -l %<CR>
 
 """ ctrlp
+map <leader>p :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
