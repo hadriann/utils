@@ -7,6 +7,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'leafgarland/typescript-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -19,7 +20,7 @@ filetype indent on
 
 syntax enable
 
-set mouse=a
+set mouse=r
 set ttyfast
 set encoding=utf-8
 set novisualbell
@@ -61,8 +62,10 @@ set foldmethod=marker
 set foldmarker={,}
 set foldlevelstart=100
 
-set background=dark
+set t_Co=256
+set background=light
 colorscheme PaperColor
+"colorscheme base16-default-dark
 
 "autocmd BufRead * NERDTreeFind
 autocmd BufWritePre * :%s/\s\+$//e
@@ -80,10 +83,10 @@ map <leader>s :set list!<CR>
 map <leader>h :set hlsearch!<CR>
 
 """ php lint
-map <leader>o :!php -l %<CR>
+map <leader>p :!php -l %<CR>
 
 """ ctrlp
-map <leader>p :CtrlPBuffer<CR>
+map <C-b> :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
