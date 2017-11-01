@@ -1,12 +1,10 @@
-IN & OUT OF VIM
----------------
+IN & OUT OF VIM:
 
 ZZ              = Save file if modified and quit. Same as ':x'.
 ZQ              = Quit without saving. Same as ':q!'.
 
 
-WORKING WITH THE SHELL
-----------------------
+WORKING WITH THE SHELL:
 
 C-z             = Drop to shell. Type 'fg' to return to vim.
 :sh             = Drop to shell. Type 'exit' to return to vim.
@@ -20,20 +18,20 @@ C-z             = Drop to shell. Type 'fg' to return to vim.
 :!!             = Reexecute last shell command.
 
 
-SEARCHING & INDENTING
----------------------
+SEARCHING & INDENTING:
 
 :%s/A/B/gc      = Search for A, replace with B. With confirmation
-*               = Search for word under cursor
+*, #            = Search for word under cursor
+/, ?            = Search for text
 %               = Find matching bracket
 ==              = Reindent current line
 =               = Format selected block
 =%              = Format block to matching bracket
 >>, <<          = Indent and unindent current line
+C-U, C-D        = Scroll half screen up / down
 
 
-BLOCK FOLDING
--------------
+BLOCK FOLDING:
 
 zo              = Open current fold
 zc              = Close current fold
@@ -42,8 +40,7 @@ zm              = Collapse all folds
 zr              = Expand all folds
 
 
-TEXT DIFFS
-----------
+TEXT DIFFS:
 
 Open vim in diff mode with 'vimdiff' or 'vim -d', they are equivalent
 
@@ -56,11 +53,10 @@ C-W + w         = Switch to the other split window. Same as C-W + C-W
 :syntax off     = Disable syntax highlighting
 
 
-COMFORT
--------
+COMFORT:
 
-C-c             = Enter normal mode
-C-n, C-p        = Trigger and navigate autocomplete
+C-C             = Enter normal mode
+C-N, C-P        = Trigger and navigate autocomplete
 C-]             = Go to tag definition for tag under cursor
 gf              = Open file under cursor
 zz              = Scroll to focus on current line
@@ -68,3 +64,8 @@ cc              = Change line
 ciw             = Change inside word
 ciX             = Change inside X. X can be (, {, ", etc
 C               = Change from cursor to EOL
+
+gcc             = Comment out line
+gc              = Comment out selection or movement
+cs"'            = Change surrounding " to ' (or to other string)
+ds"             = Remove surrounding " (or other string)
