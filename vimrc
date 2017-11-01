@@ -28,12 +28,11 @@ syntax enable
 set mouse=r
 set ttyfast
 set encoding=utf-8
-set novisualbell
 set title
-set history=500
+set history=1000
 set autoread
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:longest,full
 set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif
 
 set ruler
@@ -58,10 +57,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set smarttab
-
-set completeopt=longest,menuone
-set wrap
-set wrapscan
+set completeopt=longest,menu
 
 set foldmethod=marker
 set foldmarker={,}
