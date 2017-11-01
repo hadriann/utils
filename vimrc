@@ -36,15 +36,18 @@ set wildmode=list:longest,full
 set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif
 
 set ruler
-set number
+set relativenumber
 set cursorline
-
+set laststatus=2
 set showmatch
 set showcmd
+set visualbell
 
 set autoindent
 set smartindent
 set backspace=indent,eol,start
+set scrolloff=3
+set undofile
 
 set hlsearch
 set incsearch
@@ -64,7 +67,7 @@ set foldmarker={,}
 set foldlevelstart=100
 
 set t_Co=256
-set background=light
+set background=dark
 colorscheme PaperColor
 "colorscheme base16-default-dark
 
