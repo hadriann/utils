@@ -29,11 +29,11 @@ set mouse=r
 set ttyfast
 set encoding=utf-8
 set title
-set history=1000
+set history=100
 set autoread
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif
+set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif,node_modules,tags
 
 set ruler
 set relativenumber
@@ -41,13 +41,13 @@ set cursorline
 set laststatus=2
 set showmatch
 set showcmd
+set showmode
 set visualbell
 
 set autoindent
 set smartindent
 set backspace=indent,eol,start
 set scrolloff=3
-set undofile
 
 set hlsearch
 set incsearch
@@ -68,6 +68,13 @@ set foldlevelstart=100
 
 set t_Co=256
 set background=dark
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'allow_bold': 0
+  \     }
+  \   }
+  \ }
 colorscheme PaperColor
 "colorscheme base16-default-dark
 
