@@ -9,7 +9,8 @@ Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
+Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
@@ -25,6 +26,7 @@ filetype indent on
 
 syntax enable
 
+set hidden
 set mouse=r
 set ttyfast
 set encoding=utf-8
@@ -35,8 +37,8 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif,node_modules,tags
 
+set number
 set ruler
-set relativenumber
 set cursorline
 set laststatus=2
 set showmatch
@@ -78,9 +80,6 @@ let g:PaperColor_Theme_Options = {
 colorscheme PaperColor
 "colorscheme base16-default-dark
 
-"autocmd BufRead * NERDTreeFind
-autocmd BufWritePre * :%s/\s\+$//e
-
 let html_no_rendering=1
 let mapleader=','
 
@@ -106,3 +105,7 @@ let g:ctrlp_max_files = 0
 """ nerdtree
 map <leader>n :NERDTreeFind<CR>
 map <leader>m :NERDTreeToggle<CR>
+
+autocmd BufWritePre * :%s/\s\+$//e
+autocmd VimEnter * NERDTree | wincmd p
+autocmd BufWinEnter * NERDTreeFind | wincmd p
