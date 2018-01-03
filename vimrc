@@ -5,15 +5,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-Plug 'https://github.com/ludovicchabant/vim-gutentags'
-Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-surround'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
+Plug 'ianks/vim-tsx'
 
 call plug#end()
 
