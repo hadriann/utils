@@ -64,8 +64,9 @@ cc              = Change line
 ciw             = Change inside word
 ciX             = Change inside X. X can be (, {, ", etc
 C               = Change from cursor to EOL
+H, M, L         = Jump to top, middle or bottom of screen
 
 gcc             = Comment out line
 gc              = Comment out selection or movement
-cs"'            = Change surrounding " to ' (or to other string)
-ds"             = Remove surrounding " (or other string)
+cs"'            = Change surrounding " to ' (or other strings)
+ds"             = Delete surrounding " (or other string)
