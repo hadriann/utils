@@ -26,7 +26,7 @@
 `=` = Format selected block  
 `=%` = Format block to matching bracket  
 `>>`, `<<` = Indent and unindent current line  
-`C-U`, `C-D` = Scroll half screen up / down
+`C-u`, `C-d` = Scroll half screen up / down
 
 **BLOCK FOLDING:**
 
@@ -44,14 +44,14 @@ Open vim in *diff mode* with `vimdiff` or `vim -d`, they are equivalent.
 `dp` = Diff put changes into the other window  
 `]c` = Next difference  
 `[c` = Previous difference  
-`C-W + w` = Switch to the other split window. Same as C-W + C-W  
+`C-w + w` = Switch to the other split window. Same as C-W + C-W  
 `:diffu` = Update or recalculate diff  
 `:syntax off` = Disable syntax highlighting  
 
 **COMFORT:**
 
-`C-C` = Enter normal mode  
-`C-N`, `C-P` = Trigger and navigate autocomplete  
+`C-c` = Enter normal mode  
+`C-n`, `C-p` = Trigger and navigate autocomplete  
 `C-]` = Go to tag definition for tag under cursor  
 `gf` = Open file under cursor  
 `zz` = Scroll to focus on current line  
