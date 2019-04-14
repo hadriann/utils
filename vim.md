@@ -1,10 +1,9 @@
-IN & OUT OF VIM:
+**IN & OUT OF VIM:**
 
-ZZ              = Save file if modified and quit. Same as ':x'.
-ZQ              = Quit without saving. Same as ':q!'.
+`ZZ` = Save file if modified and quit. Same as ':x'.
+`ZQ` = Quit without saving. Same as ':q!'.
 
-
-WORKING WITH THE SHELL:
+**WORKING WITH THE SHELL:**
 
 C-z             = Drop to shell. Type 'fg' to return to vim.
 :sh             = Drop to shell. Type 'exit' to return to vim.
@@ -17,8 +16,7 @@ C-z             = Drop to shell. Type 'fg' to return to vim.
 :r !ls          = Insert directory listing.
 :!!             = Reexecute last shell command.
 
-
-SEARCHING & INDENTING:
+**SEARCHING & INDENTING:**
 
 :%s/A/B/gc      = Search for A, replace with B. With confirmation
 *, #            = Search for word under cursor
@@ -30,17 +28,15 @@ SEARCHING & INDENTING:
 >>, <<          = Indent and unindent current line
 C-U, C-D        = Scroll half screen up / down
 
+**BLOCK FOLDING:**
 
-BLOCK FOLDING:
+`zo`              = Open current fold
+`zc`              = Close current fold
+`za`              = Toggle current fold
+`zm`              = Collapse all folds
+`zr`              = Expand all folds
 
-zo              = Open current fold
-zc              = Close current fold
-za              = Toggle current fold
-zm              = Collapse all folds
-zr              = Expand all folds
-
-
-TEXT DIFFS:
+**TEXT DIFFS:**
 
 Open vim in diff mode with 'vimdiff' or 'vim -d', they are equivalent
 
@@ -52,8 +48,7 @@ C-W + w         = Switch to the other split window. Same as C-W + C-W
 :diffu          = Update or recalculate diff
 :syntax off     = Disable syntax highlighting
 
-
-COMFORT:
+**COMFORT:**
 
 C-C             = Enter normal mode
 C-N, C-P        = Trigger and navigate autocomplete
