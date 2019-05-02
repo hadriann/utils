@@ -7,15 +7,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jonsmithers/vim-html-template-literals'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mhinz/vim-startify'
+Plug 'mileszs/ack.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'pangloss/vim-javascript'
-Plug 'jonsmithers/vim-html-template-literals'
+Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
-Plug 'mhinz/vim-startify'
-Plug 'mileszs/ack.vim'
 
 call plug#end()
 
