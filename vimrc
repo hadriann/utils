@@ -5,18 +5,21 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jonsmithers/vim-html-template-literals'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-startify'
+Plug 'vim-airline/vim-airline'
+
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+Plug 'dense-analysis/ale'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'jonsmithers/vim-html-template-literals'
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -67,8 +70,9 @@ set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,
 set wildmenu
 set wildmode=list:longest,full
 
+set guifont=Ubuntu\ Mono\ 14
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 let mapleader = ','
 let html_no_rendering = 1
@@ -78,10 +82,10 @@ let html_indent_style1 = "inc"
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
-""" show spaces
+""" toggle show spaces
 map <leader>s :set list!<CR>
 
-""" show highlighting
+""" toggle search highlight
 map <leader>h :set hlsearch!<CR>
 
 """ php lint
