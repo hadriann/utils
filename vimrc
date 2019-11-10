@@ -70,7 +70,7 @@ set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,
 set wildmenu
 set wildmode=list:longest,full
 
-set guifont=Ubuntu\ Mono\ 14
+set guifont=Ubuntu\ Mono\ 13
 set background=dark
 colorscheme gruvbox
 
@@ -104,9 +104,11 @@ if executable('ag')
 endif
 
 """ ale
-let ale_open_list = 1
-let ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
-let ale_linter_aliases = {'html': ['html', 'javascript']}
+let g:ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
+let g:ale_linter_aliases = {'html': ['html', 'javascript']}
+let g:ale_fixers = {'javascript': ['prettier'], 'html': ['prettier']}
+let g:ale_open_list = 1
+let g:ale_fix_on_save = 1
 
 """ nerdtree
 let NERDTreeMinimalUI = 1
