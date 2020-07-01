@@ -67,7 +67,6 @@ set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,
 set wildmenu
 set wildmode=list:longest,full
 
-set guifont=Ubuntu\ Mono\ 13
 set background=dark
 colorscheme minimalist
 
