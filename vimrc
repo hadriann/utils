@@ -5,10 +5,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'dikiaap/minimalist'
 Plug 'mhinz/vim-startify'
-Plug 'vim-airline/vim-airline'
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
@@ -18,8 +16,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -72,7 +69,7 @@ set wildmode=list:longest,full
 
 set guifont=Ubuntu\ Mono\ 13
 set background=dark
-colorscheme gruvbox
+colorscheme minimalist
 
 let mapleader = ','
 let html_no_rendering = 1
@@ -106,7 +103,7 @@ endif
 """ ale
 let g:ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
 let g:ale_linter_aliases = {'html': ['html', 'javascript']}
-let g:ale_fixers = {'javascript': ['prettier'], 'html': ['prettier']}
+let g:ale_fixers = {'javascript': ['prettier'], 'html': ['prettier'], 'css': ['prettier']}
 let g:ale_open_list = 1
 let g:ale_fix_on_save = 1
 
