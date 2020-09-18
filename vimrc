@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'dikiaap/minimalist'
 Plug 'rakr/vim-one'
 
-Plug 'mhinz/vim-startify'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
