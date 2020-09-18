@@ -6,6 +6,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'dikiaap/minimalist'
+Plug 'rakr/vim-one'
+
 Plug 'mhinz/vim-startify'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
@@ -18,6 +20,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
+
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
@@ -69,11 +72,11 @@ set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,
 set wildmenu
 set wildmode=list:longest,full
 
+colorscheme one
 set background=dark
-colorscheme minimalist
 
 if has("gui_running")
-  set guifont=Menlo:h14
+  set guifont=Menlo:h15
   set lines=999 columns=9999
 endif
 
