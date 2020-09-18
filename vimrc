@@ -72,6 +72,11 @@ set wildmode=list:longest,full
 set background=dark
 colorscheme minimalist
 
+if has("gui_running")
+  set guifont=Menlo:h14
+  set lines=999 columns=9999
+endif
+
 let mapleader = ','
 let html_no_rendering = 1
 let html_indent_script1 = "inc"
