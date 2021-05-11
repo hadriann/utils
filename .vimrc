@@ -5,38 +5,31 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dikiaap/minimalist'
-Plug 'rakr/vim-one'
-
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'jonsmithers/vim-html-template-literals'
 Plug 'pangloss/vim-javascript'
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'airblade/vim-gitgutter'
-
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
 set nocompatible
-set noexrc
 
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
+syntax on
 
-syntax enable
+runtime macros/matchit.vim
 
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set completeopt=longest,menu
 set cursorline
 set encoding=utf-8
 set expandtab
@@ -55,8 +48,8 @@ set noswapfile
 set nowrap
 set number
 set ruler
+set shiftround
 set shiftwidth=2
-set showcmd
 set showmatch
 set showmode
 set smartcase
@@ -65,13 +58,10 @@ set smarttab
 set softtabstop=2
 set tabstop=2
 set title
-set ttyfast
 set visualbell
-set wildignore=.svn,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.gif,tags,node_modules,bower_components
+set wildignore=.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.swp,*.jpg,*.png,*.gif,tags,node_modules
 set wildmenu
-set wildmode=list:longest,full
 
-colorscheme one
 set background=dark
 
 if has("gui_running")
