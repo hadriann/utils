@@ -16,7 +16,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'jonsmithers/vim-html-template-literals'
 Plug 'pangloss/vim-javascript'
 "Plug 'tpope/vim-surround'
-"Plug 'romainl/Apprentice'
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
@@ -60,11 +59,11 @@ set softtabstop=2
 set tabstop=2
 set title
 set visualbell
-set wildignore=.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.swp,*.jpg,*.png,*.gif,tags,node_modules
 set wildmenu
+set wildignore+=.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.swp,*.jpg,*.png,*.gif,tags,node_modules,*/_modules/*
+set path+=src/**,scripts/**,public/**,common/**,packages/**
 
 set background=light
-" colorscheme apprentice
 
 if has("gui_running")
   set guifont=Menlo:h15
@@ -108,30 +107,22 @@ let ctrlp_max_files = 0
 "let g:ale_fix_on_save = 1
 
 """ nerdtree
-"let NERDTreeMinimalUI = 1
+"xlet NERDTreeMinimalUI = 1
 "let NERDTreeMouseMode = 3
 "map <leader>n :NERDTreeFind<CR>
 "map <leader>m :NERDTreeToggle<CR>
 
 "autocmd vimenter * NERDTree | wincmd p
 "autocmd bufwritepre * :%s/\s\+$//e
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"autocmd FileType javascript compiler eslint
-"autocmd BufWritePost *.py,*.js silent make! <afile> | silent redraw!
-"autocmd QuickFixCmdPost [^l]* cwindow
+augroup lint
+  autocmd!
 
-"set errorformat+=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
-"set errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-"set errorformat=%C\ %.%#,%A
-"setlocal makeprg=npm\ run\ --silent\ lint:js
-"autocmd FileType javascript setlocal makeprg=npm\ run\ --silent\ lint:js
-"autocmd BufWritePost *.py,*.js silent make! <afile> | silent redraw!
-"autocmd QuickFixCmdPost [^l]* cwindow
-setlocal formatprg=npm\ run\ --silent\ format\ --\ --stdin-filepath\ %
-autocmd BufWritePre *.js,*.html,*.css normal gggqG``
+  autocmd FileType javascript setlocal makeprg=npx\ denolint
+  autocmd BufWritePost *.js silent make! <afile> | silent redraw!
 
-"augroup JS
-"    autocmd! * <buffer>
-"    autocmd BufWritePost <buffer> silent make <afile> | silent redraw!
-"augroup END
+  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
+  autocmd BufWritePre *.js,*.html,*.css,*.json,*.yaml,*.md normal gggqG`^
+
+  autocmd QuickFixCmdPost [^l]* cwindow
+augroup END
