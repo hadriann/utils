@@ -5,17 +5,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'mileszs/ack.vim'
-"Plug 'dense-analysis/ale'
+Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'dense-analysis/ale'
 "Plug 'editorconfig/editorconfig-vim'
-"Plug 'preservim/nerdtree'
-"Plug 'tpope/vim-commentary'
-"Plug 'airblade/vim-gitgutter'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'jonsmithers/vim-html-template-literals'
+Plug 'jonsmithers/vim-html-template-literals'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
@@ -43,6 +42,7 @@ set incsearch
 set ignorecase
 set infercase
 set laststatus=2
+set listchars+=tab:>-,trail:·
 set mouse=ar
 set noswapfile
 set nowrap
@@ -60,7 +60,7 @@ set tabstop=2
 set title
 set visualbell
 set wildmenu
-set wildignore+=.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.swp,*.jpg,*.png,*.gif,tags,node_modules,*/_modules/*
+set wildignore+=*/.git/*,*/node_modules/*,*/dist/*,*/_modules/*,tags,*.png,*.jpg,*.gif,*.so,*.swp,*.o,*.a,*.class,*.mo,*.la
 set path+=src/**,scripts/**,public/**,common/**,packages/**
 
 set background=light
@@ -87,17 +87,22 @@ map <leader>h :set hlsearch!<CR>
 """ php lint
 "map <leader>p :!php -l %<CR>
 
+""" netrw
+let g:netrw_liststyle=3
+map <leader>f :Rexplore<CR>
+
 """ ctrlp
 map <C-b> :CtrlPMRU<CR>
-let ctrlp_working_path_mode = 0
-let ctrlp_by_filename = 1
-let ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
-let ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_by_filename = 1
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
+let g:ctrlp_max_files = 0
+"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 """ ack
-"if executable('ag')
-"  let ackprg = 'ag --vimgrep'
-"endif
+if executable('ag')
+  let ackprg = 'ag --vimgrep'
+endif
 
 """ ale
 "let g:ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
@@ -106,23 +111,19 @@ let ctrlp_max_files = 0
 "let g:ale_open_list = 1
 "let g:ale_fix_on_save = 1
 
-""" nerdtree
-"xlet NERDTreeMinimalUI = 1
-"let NERDTreeMouseMode = 3
-"map <leader>n :NERDTreeFind<CR>
-"map <leader>m :NERDTreeToggle<CR>
-
-"autocmd vimenter * NERDTree | wincmd p
-"autocmd bufwritepre * :%s/\s\+$//e
-
 augroup lint
   autocmd!
-
-  autocmd FileType javascript setlocal makeprg=npx\ denolint
-  autocmd BufWritePost *.js silent make! <afile> | silent redraw!
 
   autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
   autocmd BufWritePre *.js,*.html,*.css,*.json,*.yaml,*.md normal gggqG`^
 
+  autocmd FileType javascript setlocal makeprg=npx\ denolint
+  autocmd BufWritePost *.js silent make! <afile> | silent redraw!
+augroup END
+
+augroup quickfix
+  autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
 augroup END
+
+let &grepprg='grep -RIn --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'

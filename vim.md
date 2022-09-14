@@ -1,20 +1,26 @@
+npm WARN exec The following package was not found and will be installed: prettier@2.7.1
+
 # Vim tips
 
 ## Productivity
 
-Search for files: `C-p`.
+Search for files: `C-p`
 
-Find in files: `:Ack PATTERN`.
+Find in files: `:Ack PATTERN`
 
-Find and replace in file: `:%s/FIND/REPLACE/gc`.
+Find and replace in file: `:%s/FIND/REPLACE/gc`
 
-Comment out line: `gcc`.
+Comment out line: `gcc`
 
-Comment out selection or movement: `gc`.
+Comment out selection or movement: `gc`
 
-Change surrounding " to ': `cs"'`.
+Change surrounding " to ': `cs"'`
 
-Delete surrounding ": `ds"`.
+Delete surrounding ": `ds"`
+
+Cycle between current file and last edited file: `C-^`
+
+Find and edit some file anywhere in ./src: `:e src/**/somefile`
 
 ## For your comfort
 
