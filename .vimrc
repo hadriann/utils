@@ -58,6 +58,7 @@ set smarttab
 set softtabstop=2
 set tabstop=2
 set title
+set updatetime=1000
 set visualbell
 set wildmenu
 set wildignore+=*/.git/*,*/node_modules/*,*/dist/*,*/_modules/*,tags,*.png,*.jpg,*.gif,*.so,*.swp,*.o,*.a,*.class,*.mo,*.la
@@ -69,7 +70,7 @@ if has("gui_running")
   set lines=999 columns=9999
   if has("gui_gtk")
     set guifont=Liberation\ Mono\ 13
-  elseif has("gui_mac")
+  else
     set guifont=Menlo:h15
   endif
 endif
@@ -77,26 +78,29 @@ endif
 let html_no_rendering = 1
 let html_indent_script1 = "inc"
 let html_indent_style1 = "inc"
-set mapleader = ','
+let mapleader = ","
 
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
+""" remap Ex-mode switching to text formatting
+nnoremap Q gq
+
 """ toggle show spaces
-map <leader>s :set list!<CR>
+nnoremap <Leader>l :set list!<CR>
 
 """ toggle search highlight
-map <leader>h :set hlsearch!<CR>
+nnoremap <Leader>h :set hlsearch!<CR>
 
-""" php lint
-"map <leader>p :!php -l %<CR>
+""" apply vimrc changes
+nnoremap <Leader>v :source $MYVIMRC<CR>
 
 """ netrw
+nnoremap <Leader>f :Rexplore<CR>
 let g:netrw_liststyle=3
-map <leader>f :Rexplore<CR>
 
 """ ctrlp
-map <C-b> :CtrlPMRU<CR>
+nnoremap <Leader>r :CtrlPMRU<CR>
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
@@ -132,4 +136,3 @@ augroup quickfix
 augroup END
 
 let &grepprg='grep -rIn --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
-" aaaaa

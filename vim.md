@@ -2,15 +2,39 @@ npm WARN exec The following package was not found and will be installed: prettie
 
 # Vim tips
 
+## Searching
+
 Search help for word under cursor: `K`
 
+Search for word under cursor: `*` or `#` (backward)
+
+Search for custom text: `/` or `?` (backward)
+
+Repeat last search: `//`
+
+Search for A, replace with B (with confirmation, case-insensitive): `:%s/A/B/gci`
+
+Search all files for A: `:grep A` or `:Ack A`
+
+Search for files: `CTRL-P`
+
+## Moving around
+
+Jump to top, middle, bottom of screen: `H`, `M`, `L`
+
+Go to definition: `CTRL-]`
+
+Go back from definition: `CTRL-T`
+
+Jump to older position: `CTRL-O`
+
+Jump to newer position: `CTRL-I`
+
+## Editing
+
+Join lines: `J`
+
 ## Productivity
-
-Search for files: `C-p`
-
-Find in files: `:Ack PATTERN`
-
-Find and replace in file: `:%s/FIND/REPLACE/gc`
 
 Comment out line: `gcc`
 
@@ -20,81 +44,69 @@ Change surrounding " to ': `cs"'`
 
 Delete surrounding ": `ds"`
 
-Cycle between current file and last edited file: `C-^`
+Cycle between current file and last edited file: `CTRL-^`
 
 Find and edit some file anywhere in ./src: `:e src/**/somefile`
 
 ## For your comfort
 
-Jump to top, middle, bottom of screen: `H`, `M`, `L`.
+Scroll to focus current line: `zz`
 
-Scroll to focus current line: `zz`.
+Trigger and cycle autocomplete: `CTRL-N` or `CTRL-P`
 
-Trigger and cycle autocomplete: `C-n` or `C-p`.
+Open file under cursor: `gf`
 
-Go to definition: `C-]`.
+Change line: `cc`
 
-Go back after going to definition: `C-t`.
+Change from cursor to EOL: `C`
 
-Go to previous position: `C-o`.
+Change word: `ciw`
 
-Open file under cursor: `gf`.
-
-Change line: `cc`.
-
-Change from cursor to EOL: `C`.
-
-Change word: `ciw`.
-
-Change inside delimiters: `ci(`.
+Change inside delimiters: `ci(`
 
 ## In and out
 
-Save and quit: `ZZ` or `:x`.
+Save and quit: `ZZ` or `:x`
 
-Quit without saving: `ZQ` or `:q!`.
+Quit without saving: `ZQ` or `:q!`
 
 ## Search and indent
 
-Search for A, replace with B: `:%s/A/B/gc`.
+Find matching bracket: `%`
 
-Search for word under cursor: `*`, `#`.
+Reindent current line: `==`
 
-Search for text: `/` (forth) or `?` (back).
+Reindent selection: `=`
 
-Find matching bracket: `%`.
+Format block to matching bracket: `=%`
 
-Reindent current line: `==`.
+Change indent of line: `>>` or `<<`
 
-Reindent selection: `=`.
-
-Format block to matching bracket: `=%`.
-
-Change indent of line: `>>` or `<<`.
-
-Scroll half screen: `C-u` (up) or `C-d` (down).
+Scroll half screen: `CTRL-U` (up) or `CTRL-D` (down).
 
 ## Shell work
 
-Drop to shell: `C-z`. Return to Vim: `fg`.
+Drop to shell: `CTRL-Z`. Return to Vim: `fg`
 
-Drop to shell: `:sh`. Return to Vim: `exit`.
+Drop to shell: `:sh`. Return to Vim: `exit`
 
-Regenerate tags file: `:!ctags -R`.
+Regenerate tags file: `:!ctags -R`
 
-Count lines, words, bytes of current file: `:!wc %`.
+Count lines, words, bytes of current file: `:!wc %`
 
-Encode selection with ROT13: `:!rot13` or `g?`.
+ROT13 encode current line: `g??`
 
-Insert current date: `:r !date`.
+ROT13 encode selection: `g?` or `:!rot13`
 
-Insert calendar: `:r !cal`.
+Insert current date: `:r !date`
 
-Insert directory listing: `:r !ls`.
+Insert calendar: `:r !cal`
 
-Lint current PHP file: `:!php -l %`.
+Insert directory listing: `:r !ls`
 
-Re-execute last shell command: `:!!`.
+Lint current PHP file: `:!php -l %`
+
+Re-execute last shell command: `:!!`
 
 ## Block folds
 
@@ -110,7 +122,7 @@ Re-execute last shell command: `:!!`.
 
 ## Text diffs
 
-Open Vim in diff mode: `vimdiff` or `vim -d`.
+Open Vim in diff mode: `vimdiff` or `vim -d`
 
 `do` = Diff obtain changes from other window
 
@@ -120,7 +132,7 @@ Open Vim in diff mode: `vimdiff` or `vim -d`.
 
 `[c` = Previous difference
 
-`C-w + w` = Switch to the other split window. Same as C-W + C-W
+`CTRL-w + w` = Switch to the other split window. Same as CTRL-W + CTRL-W
 
 `:diffu` = Update or recalculate diff
 
