@@ -66,14 +66,18 @@ set path+=src/**,scripts/**,public/**,common/**,packages/**
 set background=light
 
 if has("gui_running")
-  set guifont=Menlo:h15
   set lines=999 columns=9999
+  if has("gui_gtk")
+    set guifont=Liberation\ Mono\ 13
+  elseif has("gui_mac")
+    set guifont=Menlo:h15
+  endif
 endif
 
-let mapleader = ','
 let html_no_rendering = 1
 let html_indent_script1 = "inc"
 let html_indent_style1 = "inc"
+set mapleader = ','
 
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
@@ -97,6 +101,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
 let g:ctrlp_max_files = 0
+let g:ctrlp_show_hidden = 1
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 """ ack
@@ -126,4 +131,5 @@ augroup quickfix
   autocmd QuickFixCmdPost [^l]* cwindow
 augroup END
 
-let &grepprg='grep -RIn --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
+let &grepprg='grep -rIn --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
+" aaaaa

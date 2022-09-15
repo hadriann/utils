@@ -2,6 +2,8 @@ npm WARN exec The following package was not found and will be installed: prettie
 
 # Vim tips
 
+Search help for word under cursor: `K`
+
 ## Productivity
 
 Search for files: `C-p`
