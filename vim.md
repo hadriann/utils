@@ -1,10 +1,22 @@
-npm WARN exec The following package was not found and will be installed: prettier@2.7.1
-
 # Vim tips
 
-## Searching
+## Help
 
 Search help for word under cursor: `K`
+
+Search help for pattern: `:helpg PATTERN`
+
+Follow help link: `CTRL-]`
+
+Go back from help link: `CTRL-T`
+
+## In and out
+
+Save and quit: `ZZ` or `:x`
+
+Quit without saving: `ZQ` or `:q!`
+
+## Searching
 
 Search for word under cursor: `*` or `#` (backward)
 
@@ -44,9 +56,9 @@ Change surrounding " to ': `cs"'`
 
 Delete surrounding ": `ds"`
 
-Cycle between current file and last edited file: `CTRL-^`
+Cycle between current file and previous file: `CTRL-^` or `:b#`
 
-Find and edit some file anywhere in ./src: `:e src/**/somefile`
+Find and edit some file under ./src: `:e src/**/somefile`
 
 ## For your comfort
 
@@ -63,12 +75,6 @@ Change from cursor to EOL: `C`
 Change word: `ciw`
 
 Change inside delimiters: `ci(`
-
-## In and out
-
-Save and quit: `ZZ` or `:x`
-
-Quit without saving: `ZQ` or `:q!`
 
 ## Search and indent
 
