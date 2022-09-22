@@ -16,6 +16,32 @@ Save and quit: `ZZ` or `:x`
 
 Quit without saving: `ZQ` or `:q!`
 
+## Jump around
+
+Jump to top / middle / bottom of screen: `H` / `M` / `L`
+
+Jump to matching bracket: `%`
+
+Go to definition: `CTRL-]`
+
+Go back from definition: `CTRL-T`
+
+Jump to older position: `CTRL-O`
+
+Jump to newer position: `CTRL-I`
+
+Jump to next / previous paragraph: `}` / `{`
+
+Jump to next / previous sentence: `)` / `(`
+
+Scroll half page: `CTRL-D` (down) or `CTRL-U` (up)
+
+Scroll full page: `CTRL-F` (down) or `CTRL-B` (up)
+
+Bring current line to focus: `zz`
+
+Open file under cursor: `gf`
+
 ## Searching
 
 Search for word under cursor: `*` or `#` (backward)
@@ -30,43 +56,9 @@ Search all files for A: `:grep A` or `:Ack A`
 
 Search for files: `CTRL-P`
 
-## Moving around
-
-Jump to top, middle, bottom of screen: `H`, `M`, `L`
-
-Go to definition: `CTRL-]`
-
-Go back from definition: `CTRL-T`
-
-Jump to older position: `CTRL-O`
-
-Jump to newer position: `CTRL-I`
-
 ## Editing
 
 Join lines: `J`
-
-## Productivity
-
-Comment out line: `gcc`
-
-Comment out selection or movement: `gc`
-
-Change surrounding " to ': `cs"'`
-
-Delete surrounding ": `ds"`
-
-Cycle between current file and previous file: `CTRL-^` or `:b#`
-
-Find and edit some file under ./src: `:e src/**/somefile`
-
-## For your comfort
-
-Scroll to focus current line: `zz`
-
-Trigger and cycle autocomplete: `CTRL-N` or `CTRL-P`
-
-Open file under cursor: `gf`
 
 Change line: `cc`
 
@@ -76,9 +68,21 @@ Change word: `ciw`
 
 Change inside delimiters: `ci(`
 
-## Search and indent
+Comment out line: `gcc`
 
-Find matching bracket: `%`
+Comment out selection or movement: `gc`
+
+Change surrounding " to ': `cs"'`
+
+Delete surrounding ": `ds"`
+
+Trigger and cycle autocomplete: `CTRL-N` or `CTRL-P`
+
+Cycle between current file and previous file: `CTRL-^` or `:b#`
+
+Find and edit some file under ./src: `:find src/**/somefile`
+
+## Format
 
 Reindent current line: `==`
 
@@ -87,8 +91,6 @@ Reindent selection: `=`
 Format block to matching bracket: `=%`
 
 Change indent of line: `>>` or `<<`
-
-Scroll half screen: `CTRL-U` (up) or `CTRL-D` (down).
 
 ## Shell work
 
