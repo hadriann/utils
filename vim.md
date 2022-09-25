@@ -22,6 +22,10 @@ Jump to top / middle / bottom of screen: `H` / `M` / `L`
 
 Jump to matching bracket: `%`
 
+Jump to block start: `[{`
+
+Jump to block end: `]}`
+
 Go to definition: `CTRL-]`
 
 Go back from definition: `CTRL-T`
@@ -64,9 +68,11 @@ Change line: `cc`
 
 Change from cursor to EOL: `C`
 
-Change word: `ciw`
+Change word: `cw` (from start) or `ciw` (from anywhere)
 
 Change inside delimiters: `ci(`
+
+Delete word: `dw` or `diw`
 
 Comment out line: `gcc`
 
@@ -78,6 +84,16 @@ Delete surrounding ": `ds"`
 
 Trigger and cycle autocomplete: `CTRL-N` or `CTRL-P`
 
+Select word: `viw`
+
+Select line: `V`
+
+Selection to lowercase: `u`
+
+Selection to uppercase: `U`
+
+Selection to inverted case: `~`
+
 Cycle between current file and previous file: `CTRL-^` or `:b#`
 
 Find and edit some file under ./src: `:find src/**/somefile`
@@ -88,7 +104,9 @@ Reindent current line: `==`
 
 Reindent selection: `=`
 
-Format block to matching bracket: `=%`
+Reindent block to matching bracket: `=%`
+
+Reindent current block: `=i{`
 
 Change indent of line: `>>` or `<<`
 
