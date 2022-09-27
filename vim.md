@@ -86,6 +86,8 @@ Trigger and cycle autocomplete: `CTRL-N` or `CTRL-P`
 
 Select word: `viw`
 
+Select word and paste: `viwp`
+
 Select line: `V`
 
 Selection to lowercase: `u`
@@ -93,6 +95,8 @@ Selection to lowercase: `u`
 Selection to uppercase: `U`
 
 Selection to inverted case: `~`
+
+Yank word: `yiw`
 
 Cycle between current file and previous file: `CTRL-^` or `:b#`
 
@@ -133,6 +137,8 @@ Insert directory listing: `:r !ls`
 Lint current PHP file: `:!php -l %`
 
 Re-execute last shell command: `:!!`
+
+Re-execute last Ex command: `@:`
 
 ## Block folds
 
