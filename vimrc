@@ -11,7 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'editorconfig/editorconfig-vim'
 Plug 'jonsmithers/vim-html-template-literals'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -128,9 +128,9 @@ let g:ctrlp_show_hidden = 1
 iabbrev Lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
 """ ack
-if executable('ag')
-  let ackprg = 'ag --vimgrep'
-endif
+"if executable('ag')
+"  let ackprg = 'ag --vimgrep'
+"endif
 
 """ ale
 "let g:ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
@@ -139,18 +139,18 @@ endif
 "let g:ale_open_list = 1
 "let g:ale_fix_on_save = 1
 
+let &grepprg='grep -rIni --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
+
 augroup lint
   autocmd!
-  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ prettier\ --stdin-filepath\ %
-  autocmd BufWritePre *.js,*.mjs,*.html,*.css,*.json,*.yaml,*.md normal gggqG`^
+  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ prettier\ --loglevel\ silent\ --stdin-filepath\ %
+  autocmd BufWritePre *.js,*.mjs,*.html,*.css,*.json,*.yaml,*.md normal mogggqG`o
 augroup END
 
-"autocmd FileType javascript setlocal makeprg=npx\ denolint
-"autocmd BufWritePost *.js,*.mjs silent make! <afile> | silent redraw!
+autocmd FileType javascript setlocal makeprg=npx\ denolint\ --format\ compact
+autocmd BufWritePost *.js,*.mjs silent make! <afile> | silent redraw!
 
 augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
 augroup END
-
-"let &grepprg='grep -rIn --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
