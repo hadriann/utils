@@ -143,11 +143,11 @@ let &grepprg='grep -rIni --exclude=tags --exclude-dir={.git,node_modules,dist,_m
 
 augroup lint
   autocmd!
-  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ prettier\ --loglevel\ silent\ --stdin-filepath\ %
+  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ --no\ prettier\ --stdin-filepath\ %
   autocmd BufWritePre *.js,*.mjs,*.html,*.css,*.json,*.yaml,*.md normal mogggqG`o
 augroup END
 
-autocmd FileType javascript setlocal makeprg=npx\ denolint\ --format\ compact
+autocmd FileType javascript setlocal makeprg=npx\ --no\ denolint\ --format\ compact
 autocmd BufWritePost *.js,*.mjs silent make! <afile> | silent redraw!
 
 augroup quickfix
