@@ -1,43 +1,51 @@
+set nocompatible
+set encoding=utf-8
+let g:mapleader = ","
+
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  if executable('curl')
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  else
+    echohl WarningMsg | echo "curl not found, skipping vim-plug installation" | echohl None
+  endif
 endif
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'dense-analysis/ale'
-"Plug 'editorconfig/editorconfig-vim'
+Plug 'github/copilot.vim'
 Plug 'jonsmithers/vim-html-template-literals'
-Plug 'ludovicchabant/vim-gutentags'
-"Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 call plug#end()
 
-set nocompatible
+let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'sh', 'json', 'js=javascript', 'bash=sh']
+let g:javascript_plugin_jsdoc = 1
+let g:htl_css_templates = 1
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+" let g:htl_all_templates = 1
+
+silent! packadd! comment
+silent! packadd! editorconfig
+silent! packadd! matchit
+silent! packadd! hlyank
 
 filetype plugin indent on
 syntax on
-
-runtime macros/matchit.vim
+colorscheme slate " (or desert)
 
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set cmdheight=2
+set completeopt=menuone,noinsert,noselect
 set cursorline
-set encoding=utf-8
 set expandtab
 set foldmethod=marker
 set foldmarker={,}
 set foldlevelstart=100
 set hidden
-set history=100
+set history=1000
 set hlsearch
 set incsearch
 set ignorecase
@@ -48,53 +56,57 @@ set mouse=ar
 set noswapfile
 set nowrap
 set number
-"set path=.,,src/**,scripts/**,public/**,common/**,packages/**,demo/**,styles/**,components/**,elements/**
 set path=.,,**
 set ruler
 set shiftround
 set shiftwidth=2
-set shortmess-=S
-set shortmess-=l
-set shortmess-=f
+set shortmess-=Slf
 set showcmd
 set showmatch
 set showmode
 set smartcase
-set smartindent
 set smarttab
-set softtabstop=2
-"set statusline=%f%=%l
+set softtabstop=-1  " same as shiftwidth
 set tabstop=2
 set title
-set updatetime=1000
-"set viminfo+=%
+set updatetime=300  " Makes git gutter diff markers update in 300ms
+set viminfo+=%
 set visualbell
 set wildcharm=<C-z>
 set wildmenu
-set wildignore+=*/.git/*,*/node_modules/*,*/dist/*,*/_modules/*
-set wildignore+=tags,*.png,*.jpg,*.gif,*.so,*.swp,*.o,*.a,*.class
-
-set background=dark
-colorscheme desert
+set wildmode=longest:full,full,lastused
+set wildignore+=*/.git/*,*/node_modules/*,*/dist/*,*/build/*,*/_modules/*,*/coverage/*,*/.cache/*
+set wildignore+=tags,*.png,*.jpg,*.gif,*.so,*.swp,*.o,*.a,*.class,*.DS_Store
+set wildignorecase  " Case-insensitive file name matching (:find *button matches Button.js)
+set wildoptions+=pum
 
 if has("gui_running")
-  set lines=999 columns=9999
-  if has("gui_gtk")
-    set guifont=Liberation\ Mono\ 13
-  else
-    set guifont=Menlo:h15
-  endif
+  set guifont=Menlo:h15,Liberation\ Mono\ 12,DejaVu\ Sans\ Mono\ 11
 endif
-
-let html_no_rendering = 1
-let html_indent_script1 = "inc"
-let html_indent_style1 = "inc"
-let g:mapleader = ","
 
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
-""" remap Ex-mode switching to text formatting
+" Share clipboard with macOS and Linux desktop
+if has('clipboard')
+  set clipboard^=unnamed,unnamedplus
+endif
+
+""" files
+nnoremap <Leader>f :find *
+
+""" completion
+" Trigger Omni-completion with Ctrl-Space (matching VS Code; <C-@> is sent on macOS/BSD terminals)
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-x><C-o>
+
+""" buffers
+nnoremap <Leader>b :buffer <C-Z>
+nnoremap <Leader><Space> :buffer#<CR>
+nnoremap <BS> :bprevious<CR>
+" CTRL-^ switch to alternate (previous) buffer
+
+""" format text
 nnoremap Q gq
 
 """ misc mappings
@@ -102,55 +114,88 @@ nnoremap <Leader>v :source $MYVIMRC<CR>
 nnoremap <Leader>h :nohlsearch<CR>
 nnoremap <Leader>l :set list!<CR>
 
-""" buffers
-"nnoremap <Leader>b :ls<CR>:buffer<Space>
-"nnoremap <Leader>b :buffer <C-z><S-Tab>
-nnoremap <Leader>b :buffer <C-Z>
-nnoremap <Leader>m :bnext<CR>
-nnoremap <BS> :buffer#<CR>
+""" netrw (configured as a split/buffer explorer)
+let g:netrw_banner = 0          " Remove the noisy header banner (press 'I' to toggle)
+let g:netrw_liststyle = 3       " Tree style (collapsible folders; press 'i' to cycle styles)
+let g:netrw_browse_split = 0    " 0 = open file in current split (replaces netrw cleanly)
+let g:netrw_altv = 1            " Open vertical split to the right (when pressing 'v' or :Vexplore)
+let g:netrw_alto = 1            " Open horizontal split below (when pressing 'o' or :Sexplore)
+let g:netrw_keepdir = 1         " Keep project root locked
+let g:netrw_list_hide = '^\..*$,^node_modules/$,\(\.pyc\|\.swp\)$'
+let g:netrw_hide = 1            " Hide dotfiles/node_modules by default (press 'a' or 'gh' to toggle)
 
-""" files
-nnoremap <Leader>f :find *
+" '-' opens netrw in current window at the current file's directory (press '-' again to go up)
+nnoremap <silent> - :Explore<CR>
 
-""" netrw
-nnoremap <Leader>e :Rexplore<CR>
-let g:netrw_liststyle=3
-
-""" ctrlp
-nnoremap <Leader>r :CtrlPMRU<CR>
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_by_filename = 1
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:20,results:50'
-let g:ctrlp_max_files = 0
-let g:ctrlp_show_hidden = 1
-"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-iabbrev Lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-""" ack
-"if executable('ag')
-"  let ackprg = 'ag --vimgrep'
-"endif
-
-""" ale
-"let g:ale_linters = {'javascript': ['eslint'], 'html': ['eslint']}
-"let g:ale_linter_aliases = {'html': ['html', 'javascript']}
-"let g:ale_fixers = {'javascript': ['prettier'], 'html': ['prettier'], 'css': ['prettier']}
-"let g:ale_open_list = 1
-"let g:ale_fix_on_save = 1
-
-let &grepprg='grep -rIni --exclude=tags --exclude-dir={.git,node_modules,dist,_modules} $*'
-
-augroup lint
+" Auto-clean netrw buffers so they do not pollute the buffer list (:ls / :bprevious)
+augroup netrw_split
   autocmd!
-  autocmd FileType javascript,html,css,json,yaml,markdown setlocal formatprg=npx\ --no\ prettier\ --stdin-filepath\ %
-  autocmd BufWritePre *.js,*.mjs,*.html,*.css,*.json,*.yaml,*.md normal mogggqG`o
+  autocmd FileType netrw setlocal bufhidden=wipe
+  " Press 'q' inside netrw to cancel and go back to previous buffer
+  autocmd FileType netrw nnoremap <buffer> <silent> q :bdelete<CR>
 augroup END
 
-autocmd FileType javascript setlocal makeprg=npx\ --no\ denolint\ --format\ compact
-autocmd BufWritePost *.js,*.mjs silent make! <afile> | silent redraw!
+iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
+""" format on save: local prettier if present, otherwise native indent (=)
+function! s:format_file() abort
+  let l:prettier = findfile('node_modules/.bin/prettier', expand('%:p:h') . ';')
+  let l:view = winsaveview()
+
+  if executable(l:prettier)
+    let l:cmd = fnameescape(l:prettier) . ' --stdin-filepath ' . fnameescape(expand('%:p'))
+    let l:lines = getline(1, '$')
+    let l:output = systemlist(l:cmd, l:lines)
+
+    if v:shell_error == 0 && l:output != l:lines
+      silent! undojoin
+      call setline(1, l:output)
+    endif
+  else
+    if &filetype !=# 'markdown'
+      silent! undojoin
+      normal! gg=G
+    endif
+  endif
+
+  call winrestview(l:view)
+endfunction
+
+command! Format call s:format_file()
+nnoremap <Leader>= :call <SID>format_file()<CR>
+
+augroup format_on_save
+  autocmd!
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.html,*.json,*.md,*.yaml call s:format_file()
+augroup END
+
+""" project search (ripgrep + quickfix)
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --glob\ '!.git'
+  set grepformat=%f:%l:%c:%m
+elseif executable('git')
+  set grepprg=git\ grep\ -n\ --column\ --untracked
+  set grepformat=%f:%l:%c:%m
+else
+  set grepprg=grep\ -rn\ --exclude-dir=node_modules\ --exclude-dir=.git
+  set grepformat=%f:%l:%m
+endif
+
+" Search mappings: ,g (type query) and ,G (word under cursor)
+nnoremap <Leader>g :silent grep! ""<Left>
+nnoremap <Leader>G :silent grep! <cword><CR>
+
+" Result navigation (next / previous match)
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
+
+" Auto-open results window and allow 'q' to close it
 augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
+  autocmd FileType qf nnoremap <buffer> <silent> q :cclose<CR>
 augroup END
+
+" :set makeprg=npx\ oxlint\ -f\ unix
+" :set makeprg=npm\ test
