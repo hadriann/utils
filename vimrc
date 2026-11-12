@@ -3,12 +3,8 @@ set encoding=utf-8
 let g:mapleader = ","
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  if executable('curl')
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  else
-    echohl WarningMsg | echo "curl not found, skipping vim-plug installation" | echohl None
-  endif
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -28,50 +24,60 @@ let g:html_indent_style1 = "inc"
 
 silent! packadd! comment
 silent! packadd! editorconfig
-silent! packadd! matchit
 silent! packadd! hlyank
-
+silent! packadd! matchit
 filetype plugin indent on
 syntax on
 colorscheme slate " (or desert)
 
-set autoindent
-set autoread
-set backspace=indent,eol,start
-set completeopt=menuone,noinsert,noselect
+""" UI & Appearance
+set number
 set cursorline
+set cmdheight=2
+set laststatus=2
+set shortmess-=S shortmess-=l shortmess-=f
+set ruler
+set showcmd
+set showmode
+set title
+set visualbell
+set listchars+=tab:>-,trail:·
+if has("gui_running")
+  set guifont=Menlo:h15,Liberation\ Mono\ 12,DejaVu\ Sans\ Mono\ 11
+endif
+
+""" Indentation & Formatting
+set autoindent
 set expandtab
-set foldmethod=marker
-set foldmarker={,}
-set foldlevelstart=100
-set hidden
-set history=1000
+set shiftwidth=2
+set tabstop=2
+set softtabstop=-1  " follows shiftwidth
+set shiftround
+set smarttab
+set nowrap
+
+" format text
+nnoremap Q gq
+
+""" Search & Matching
 set hlsearch
 set incsearch
 set ignorecase
-set infercase
-set laststatus=2
-set listchars+=tab:>-,trail:·
-set mouse=ar
-set noswapfile
-set nowrap
-set number
-set path=.,,**
-set ruler
-set shiftround
-set shiftwidth=2
-set shortmess-=Slf
-set showcmd
-set showmatch
-set showmode
 set smartcase
-set smarttab
-set softtabstop=-1  " same as shiftwidth
-set tabstop=2
-set title
+set infercase
+set showmatch
+nnoremap <Leader>h :nohlsearch<CR>
+
+""" Files, Backups & History
+set path=.,,**
+set autoread
+set hidden
+set history=1000
+set noswapfile
 set updatetime=300  " Makes git gutter diff markers update in 300ms
 set viminfo+=%
-set visualbell
+
+""" Wildmenu / Command-line completion
 set wildcharm=<C-z>
 set wildmenu
 set wildmode=longest:full,full,lastused
@@ -80,39 +86,36 @@ set wildignore+=tags,*.png,*.jpg,*.gif,*.so,*.swp,*.o,*.a,*.class,*.DS_Store
 set wildignorecase  " Case-insensitive file name matching (:find *button matches Button.js)
 set wildoptions+=pum
 
-if has("gui_running")
-  set guifont=Menlo:h15,Liberation\ Mono\ 12,DejaVu\ Sans\ Mono\ 11
-endif
+""" Folding
+set foldmethod=marker
+set foldmarker={,}
+set foldlevelstart=100
 
+""" Mouse & Clipboard
+set mouse=ar
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
-
-" Share clipboard with macOS and Linux desktop
 if has('clipboard')
   set clipboard^=unnamed,unnamedplus
 endif
 
-""" files
-nnoremap <Leader>f :find *
-
-""" completion
-" Trigger Omni-completion with Ctrl-Space (matching VS Code; <C-@> is sent on macOS/BSD terminals)
+""" autocomplete
+set completeopt=menuone,noinsert,noselect
 inoremap <C-Space> <C-x><C-o>
+
+" needed for MacOS/BSD terminals
 inoremap <C-@> <C-x><C-o>
+
+""" misc
+nnoremap <Leader>v :source $MYVIMRC<CR>
+nnoremap <Leader>l :set list!<CR>
+iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
 """ buffers
 nnoremap <Leader>b :buffer <C-Z>
 nnoremap <Leader><Space> :buffer#<CR>
 nnoremap <BS> :bprevious<CR>
 " CTRL-^ switch to alternate (previous) buffer
-
-""" format text
-nnoremap Q gq
-
-""" misc mappings
-nnoremap <Leader>v :source $MYVIMRC<CR>
-nnoremap <Leader>h :nohlsearch<CR>
-nnoremap <Leader>l :set list!<CR>
 
 """ netrw (configured as a split/buffer explorer)
 let g:netrw_banner = 0          " Remove the noisy header banner (press 'I' to toggle)
@@ -135,7 +138,33 @@ augroup netrw_split
   autocmd FileType netrw nnoremap <buffer> <silent> q :bdelete<CR>
 augroup END
 
-iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+""" search files by name (using ripgrep / git into quickfix)
+if executable('rg')
+  let g:findprg = 'rg --files --hidden -g "!.git"'
+elseif executable('git')
+  let g:findprg = 'git ls-files --cached --others --exclude-standard'
+else
+  let g:findprg = 'find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*"'
+endif
+
+command! -nargs=1 Find call setqflist([], ' ', {'lines': systemlist(g:findprg . ' | grep -i ' . shellescape(<q-args>)), 'efm': '%f'}) | cwindow
+nnoremap <Leader>f :Find<Space>
+
+""" search across files
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --glob\ '!.git'
+  set grepformat=%f:%l:%c:%m
+elseif executable('git')
+  set grepprg=git\ grep\ -n\ --column\ --untracked
+  set grepformat=%f:%l:%c:%m
+else
+  set grepprg=grep\ -rn\ --exclude-dir=node_modules\ --exclude-dir=.git
+  set grepformat=%f:%l:%m
+endif
+
+" Search mappings: ,g (type query) and ,G (word under cursor)
+nnoremap <Leader>g :silent grep! ""<Left>
+nnoremap <Leader>G :silent grep! <cword><CR>
 
 """ format on save: local prettier if present, otherwise native indent (=)
 function! s:format_file() abort
@@ -166,28 +195,13 @@ nnoremap <Leader>= :call <SID>format_file()<CR>
 
 augroup format_on_save
   autocmd!
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.html,*.json,*.md,*.yaml call s:format_file()
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.html,*.json,*.md,*.yaml,*.yml call s:format_file()
 augroup END
 
-""" project search (ripgrep + quickfix)
-if executable('rg')
-  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --glob\ '!.git'
-  set grepformat=%f:%l:%c:%m
-elseif executable('git')
-  set grepprg=git\ grep\ -n\ --column\ --untracked
-  set grepformat=%f:%l:%c:%m
-else
-  set grepprg=grep\ -rn\ --exclude-dir=node_modules\ --exclude-dir=.git
-  set grepformat=%f:%l:%m
-endif
-
-" Search mappings: ,g (type query) and ,G (word under cursor)
-nnoremap <Leader>g :silent grep! ""<Left>
-nnoremap <Leader>G :silent grep! <cword><CR>
-
-" Result navigation (next / previous match)
+""" quickfix navigation
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
+nnoremap <Leader>q :copen<CR>
 
 " Auto-open results window and allow 'q' to close it
 augroup quickfix
